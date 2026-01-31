@@ -47,12 +47,12 @@ export default function Portfolio() {
   const [terminalText, setTerminalText] = useState("");
   const [activeSection, setActiveSection] = useState("home");
   const [selectedProject, setSelectedProject] = useState(null);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const heroRef = useRef(null);
+
+
   const cursorRef = useRef(null);
   const cursorFollowerRef = useRef(null);
 
-  // Toggle theme
+  
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
@@ -61,63 +61,12 @@ export default function Portfolio() {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Custom Cursor
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    const follower = cursorFollowerRef.current;
-
-    const onMouseMove = (e) => {
-      if (cursor && follower) {
-        gsap.to(cursor, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.1,
-        });
-        gsap.to(follower, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.3,
-        });
-      }
-    };
-
-    const onMouseEnter = () => {
-      if (cursor) {
-        cursor.classList.add("hover");
-      }
-    };
-
-    const onMouseLeave = () => {
-      if (cursor) {
-        cursor.classList.remove("hover");
-      }
-    };
-
-    // Add hover effect to interactive elements
-    const interactiveElements = document.querySelectorAll(
-      "a, button, input, textarea"
-    );
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", onMouseEnter);
-      el.addEventListener("mouseleave", onMouseLeave);
-    });
-
-    window.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnter);
-        el.removeEventListener("mouseleave", onMouseLeave);
-      });
-    };
-  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Terminal typing effect
+  
   useEffect(() => {
     const text = "npm run build-amazing-things";
     let index = 0;
@@ -132,7 +81,6 @@ export default function Portfolio() {
     return () => clearInterval(interval);
   }, []);
 
-  // Active section tracker
   useEffect(() => {
     const sections = document.querySelectorAll("section[id]");
     const observer = new IntersectionObserver(
@@ -151,7 +99,7 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    // Custom cursor
+ 
     const handleMouseMove = (e) => {
       gsap.to(cursorRef.current, {
         x: e.clientX,
@@ -163,7 +111,7 @@ export default function Portfolio() {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Code rain effect
+   
     const canvas = document.getElementById("code-rain");
     if (canvas) {
       const ctx = canvas.getContext("2d");
@@ -210,7 +158,6 @@ export default function Portfolio() {
       };
     }
 
-    // GSAP Animations
     gsap.from(".hero-content", {
       opacity: 0,
       y: 100,
@@ -318,6 +265,25 @@ export default function Portfolio() {
       improvements:
         "Planning to add a pet care blog, veterinary consultation booking, and a community forum where pet owners can connect and share experiences.",
       mainTech: "React, Firebase, Stripe API, React Context, Tailwind CSS",
+    },
+    {
+      title: "Scentora - Online Perfume Shop",
+      description:
+        "Sentora is a fragrance e-commerce platform that allows users to browse products, filter by categories and brands, view detailed product information, and manage their shopping experience with authentication-based features.",
+      tech: ["Next.js", "MongoDB", "Tailwind", "JWT"],
+      live: "https://sentora-online-perfume-shop.vercel.app",
+      github: "https://github.com/omarabir/Scentora--Online_Perfume_Shop",
+      color: "#F15959",
+      icon: Globe,
+      image:
+        "https://i.ibb.co.com/gL3K6QV9/Neutral-Beige-Screen-Creator-Facebook-Cover.png",
+      fullDescription:
+        "Sentora is a fragrance e-commerce platform that allows users to browse products, filter by categories and brands, view detailed product information, and manage their shopping experience with authentication-based features.",
+      challenges:
+        "Building a secure payment integration and managing complex product inventory with multiple categories. Also implemented advanced search and filtering for better user experience.",
+      improvements:
+        "Planning to add a pet care blog, veterinary consultation booking, and a community forum where pet owners can connect and share experiences.",
+      mainTech: "Next.js, MongoDB, Tailwind CSS,JWT",
     },
   ];
 
@@ -531,8 +497,8 @@ export default function Portfolio() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            {/* Logo */}
+          <div href="/" className="flex justify-between items-center">
+        
             <div className="flex items-center gap-3 group cursor-pointer">
               <img
                 src={
@@ -2166,7 +2132,7 @@ export default function Portfolio() {
                     theme === "dark" ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
-                  +880 134-224629
+                  +880 1799-224629
                 </p>
               </div>
             </a>
@@ -2195,7 +2161,7 @@ export default function Portfolio() {
                     theme === "dark" ? "text-gray-400" : "text-gray-600"
                   }`}
                 >
-                  +880 134-224629
+                  +880 1799-459659
                 </p>
               </div>
             </a>
@@ -2228,11 +2194,7 @@ export default function Portfolio() {
                 href: "https://x.com/Omar_Abir_",
                 label: "X (Twitter)",
               },
-              {
-                icon: Facebook,
-                href: "https://facebook.com/omarabir",
-                label: "Facebook",
-              },
+             
             ].map((social, i) => (
               <a
                 key={i}
